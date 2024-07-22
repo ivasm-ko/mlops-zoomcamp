@@ -1,0 +1,7 @@
+mlflow
+jupyter
+scikit-learn==1.5.0
+pandas
+seaborn
+hyperopt
+xgboost
