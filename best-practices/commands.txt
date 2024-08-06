@@ -1,0 +1,38 @@
+code Dockerfile
+code Pipfile
+code Pipfile.lock
+mkdir tests && cd tests/
+code model_test.py
+touch __init__.py
+pipenv install
+pipenv install --dev pytest
+which python
+pipenv --venv
+which pytest
+. /home/codespace/.local/share/virtualenvs/06-best-practices-EhTA5YkS/bin/activate
+PS1="> "
+
+code docker-compose.yaml
+docker-compose up -d
+sudo pip3 install awscli --upgrade
+aws --version
+aws configure --profile localstack
+aws --endpoint-url=http://localhost:4566 --profile localstack s3 mb s3://nyc-duration
+docker-compose logs localstack
+docker exec -it <container_id> sh
+
+
+# export INPUT_FILE_PATTERN="https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_{year:04d}-{month:02d}.parquet"
+export INPUT_FILE_PATTERN="s3://nyc-duration/in/{year:04d}-{month:02d}.parquet"
+export OUTPUT_FILE_PATTERN="s3://nyc-duration/out/{year:04d}-{month:02d}.parquet"
+export S3_ENDPOINT_URL='http://localhost:4566'
+export S3_BUCKET_NAME='nyc-duration'
+export S3_FOLDERS_LIST='["in", "out"]'
+
+
+aws --endpoint-url=http://localhost:4566 --profile localstack s3 mb s3://nyc-duration
+
+## Create folder in s3_bucket
+aws --endpoint-url=http://localhost:4566 --profile localstack s3api put-object --bucket nyc-duration --key out/ --content-length 0
+
+numfmt --to=iec-i --suffix=B --format="%.3f" 68641880

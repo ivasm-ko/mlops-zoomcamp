@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  localstack:
+    image: localstack/localstack:latest
+    container_name: localstack
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=s3
+      - DEBUG=1  # Enables debug output to help diagnose issues
+      - DATA_DIR=/tmp/localstack/data
+#     volumes:
+#       - "/var/run/docker.sock:/var/run/docker.sock"
+#       - "localstack-data:/tmp/localstack" # Ensuring volume for persistence
+# volumes:
+#   localstack-data:
+
+  
+# version: '3.8'
+# services:
+#   localstack:
+#     image: localstack/localstack:latest
+#     container_name: localstack
+#     ports:
+#       - "4566:4566"
+#     environment:
+#       - SERVICES=s3
+#       - DEFAULT_REGION=us-east-1
+#       - AWS_DEFAULT_REGION=us-east-1
+#       - EDGE_PORT=4566
+#       - DATA_DIR=/tmp/localstack/data  # make sure this doesn't clash
+#     volumes:
+#       - localstack-data:/tmp/localstack:rw  # proper mount with read/write permissions
+#     networks:
+#       - localstack-net
+#     restart: unless-stopped
+
+# volumes:
+#   localstack-data:
+
+# networks:
+#   localstack-net:
